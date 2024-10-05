@@ -1,5 +1,5 @@
 public class DataInput {
-    private Long memSize;
+    private Double memSize;
     private int words;
     private int lines;
     private int lanes;
@@ -16,7 +16,7 @@ public class DataInput {
     int cacheHit;
 
 
-    public DataInput(Long memSize,int words,int lines,int lanes,int[] address){
+    public DataInput(Double memSize,int words,int lines,int lanes,int[] address){
         this.memSize = memSize;
         this.words = words;
         this.lines = lines;
@@ -27,7 +27,7 @@ public class DataInput {
     }
 
     private void findAllValues(){
-        this.memBitSize = getBit(getAddress()[0]);
+        this.memBitSize = getBit((int)(Math.floor(memSize)));
         this.lineBytes = 4 * getWords();
         this.sets = getLines() / getLanes();
         this.blockBitSize = getBit(lineBytes);
@@ -39,14 +39,10 @@ public class DataInput {
 
     
     public int getBit(int value){
-        if (value == 0)
-            return 1;
-        
-        return (int)(Math.floor(Math.log(value) / Math.log(2))) + 1;
-    }
-    public String printData() {
-        String data = "" + getMemSize() + "\n" +  getWords() +"\n"+ getLines() +"\n"+  getLanes() +"\n" + adressToString();
-        return data;
+        if (value == 1) 
+            return 0;
+
+        return (int) (Math.log(value) / Math.log(2));
     }
 
     public String adressToString(){
@@ -88,7 +84,7 @@ public class DataInput {
         return cacheHit;
     }
 
-    public Long getMemSize() {
+    public Double getMemSize() {
         return memSize;
     }
 

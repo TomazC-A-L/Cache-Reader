@@ -6,10 +6,10 @@ public class Reader {
         BufferedReader read = new BufferedReader(new FileReader(removerLinhaVazia(file)));
         String linha;
 
-        Long memSizeLong = 0L;
+        Double memSizeDouble = 0.0;
         int[] memoryInfos = new int[3];
         linha = read.readLine();
-        Long aux = Long.parseLong(linha);
+        Double aux = Double.parseDouble(linha);
         
         if(linha != null)
             if(aux > 4294967296L){
@@ -18,7 +18,7 @@ public class Reader {
                 return;
             }
             else 
-                memSizeLong = aux;
+                memSizeDouble = aux;
             
         
 
@@ -32,7 +32,7 @@ public class Reader {
 
         if((linha = read.readLine()) != null)
             if(
-            (memSizeLong >= 1 && memSizeLong <= 4294967296L) &&
+            (memSizeDouble >= 1 && memSizeDouble <= 4294967296L) &&
             (memoryInfos[0] >= 1 && memoryInfos[0] <= 65536) &&
             (memoryInfos[1] >= 1 && memoryInfos[1] <= 65536) &&
             (memoryInfos[2] >= 1 && memoryInfos[2] <= 1024)){
@@ -43,7 +43,7 @@ public class Reader {
                     int[] adrs = new int[temp.length]; // endereços de memoria
                     for(int i = 0; i < temp.length; i++){
                         int verify = Integer.parseInt(temp[i]);
-                        if(verify >= 0 && (verify <= (memoryInfos[0]-1) || verify <= memSizeLong))
+                        if(verify >= 0 && (verify <= (memoryInfos[0]-1) || verify <= memSizeDouble))
                         // criar o cache hit e cache miss!!!
                         /* criar lista de hits e verificar */
                             adrs[i] = Integer.parseInt(temp[i]);
@@ -53,7 +53,7 @@ public class Reader {
                         }
                     }
 
-                    DataInput memory = new DataInput(memSizeLong, memoryInfos[0], memoryInfos[1], memoryInfos[2], adrs);
+                    DataInput memory = new DataInput(memSizeDouble, memoryInfos[0], memoryInfos[1], memoryInfos[2], adrs);
                     
                     System.out.println(MapingType.CheckMaping(memory));
                     read.close();
