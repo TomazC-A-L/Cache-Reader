@@ -11,11 +11,11 @@ public class MapingType {
         }
         // associativo
         else if (memory.getSets() < memory.getLines())
-            memory.tagBits = memory.getMemBitSize() - memory.setSizes;
+            memory.tagBits = memory.getMemBitSize() - memory.getBlockBitSize() - memory.setSizes;
         
         //completamente associativo
         else if (memory.getSets() == 1)
-            memory.tagBits = memory.getMemBitSize() - memory.blockBitSize - memory.setSizes;
+            memory.tagBits = memory.getMemBitSize() - memory.blockBitSize;
     
         ArrayList <Integer> chacheSetList = new ArrayList<Integer>();
 
