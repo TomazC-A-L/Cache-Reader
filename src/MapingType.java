@@ -10,7 +10,7 @@ public class MapingType {
             memory.tagBits = memory.getMemBitSize() - lineBits - memory.getBlockBitSize();
         }
         // associativo
-        else if (memory.getSets() < memory.getLines())
+        else if (memory.getSets() < memory.getLines() && memory.getLines() != memory.getLanes())
             memory.tagBits = memory.getMemBitSize() - memory.getBlockBitSize() - memory.setSizes;
         
         //completamente associativo
